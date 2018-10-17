@@ -47,7 +47,7 @@ class Snake {
     const me = this;
     let isHit = false;
     let head = me.location[0];
-    for(let i = 3; i < me.location.length; i ++){
+    for(let i = 4; i < me.location.length; i ++){
       if(service.detectCollision(head, me.location[i])){
         isHit = true;
       }

@@ -48,7 +48,7 @@ class SnakeApp{
     const me = this;
     document.addEventListener("keydown", e => {
       const { keyCode } = e;
-      if(keyCode in DIRECTIONS){
+      if(keyCode in DIRECTIONS && !me.gameOver){
         me.snake.changeDirection(DIRECTIONS[keyCode]);
       }
     });
