@@ -1,4 +1,4 @@
-h1, h2, h3, h4, h5, span, a, p {
+h1, h2, h3, h4, h5, span, a, p, button {
   font-family: 'Play', sans-serif;
 }
 header {
@@ -14,21 +14,10 @@ canvas {
   margin: 20px auto;
 }
 
-.gameUI{
-  width: 400px;
-  margin: 0 auto;
-  display: flex;
-
-  .gameText{
-    padding: 15px;
-  }
-  .gameControl{
-    padding: 10px 10px 10px 80px;
-    button{
-      padding: 8px 20px;
-    }
-    h1{
-      color: #ff7148
-    }
-  }
+.gameControl {
+  text-align: center;
+}
+#gameStartBtn {
+  padding: 8px 50px;
+  font-size: 1.2em;
 }

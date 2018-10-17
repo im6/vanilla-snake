@@ -26,3 +26,10 @@ npm run build
 - add css autoprefixer for old browser
 - compress js file to gzip format
 - seperate css content from js bundle file
+
+for gaming function:
+- add confirmation if user click 'start' button before game over.
+
+
+### uploaded zip file may not be the latest version, demo site will hosting the
+latest code.

@@ -11,32 +11,16 @@
 <body>
     <header>
       <h1>
-        Snake
+        Score: <span id="scoreText">0</span>
       </h1>
     </header>
     <section>
       <canvas id="appCan"></canvas>
     </section>
-    <section class="gameUI">
-      <div class="gameText">
-        <h3>
-          Key Instruction:
-        </h3>
-        <p>
-          W: Up <br/>
-          S: Down <br/>
-          A: Left <br/>
-          D: Right <br/>
-        </p>
-      </div>
-      <div class="gameControl">
-        <h1>
-          Score: <span id="scoreText">0</span>
-        </h1>
-        <button id="gameStartBtn">
-          Start
-        </button>
-      </div>
+    <section class="gameControl">
+      <button id="gameStartBtn">
+        Start
+      </button>
     </section>
 
     <script src="/bundle.js"></script>
