@@ -18,10 +18,6 @@ const getSnakeBoxColor = idx => {
   return idx === 0 ? SNAKE_HEAD_COLOR : SNAKE_BODY_COLOR;
 };
 
-const isEmptyCell = (point, snake) => {
-  return !snake.some(v => detectCollision(v, point));
-};
-
 const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -44,12 +40,23 @@ const detectCollision = (n1, n2) => {
   return n1.x === n2.x && n1.y === n2.y;
 };
 
+const isEmptyCell = (point, snake) => {
+  return !snake.some(v => detectCollision(v, point));
+};
+
+const checkHitWall = (point) => {
+  const isHit = point.x >= CANVAS_WIDTH ||
+      point.x < 0 ||
+      point.y >= CANVAS_HEIGHT ||
+      point.y < 0;
+  return isHit;
+};
+
 const getRandomPosition = (snake) => {
   const position = {
     x: getRandomNumber(0, CANVAS_WIDTH - 1),
     y: getRandomNumber(0, CANVAS_HEIGHT - 1),
   };
-  console.log(position);
   return isEmptyCell(position, snake) ? position : getRandomPosition(snake);
 };
 
@@ -57,5 +64,7 @@ export default {
   drawSnake,
   drawFood,
   detectCollision,
+  isEmptyCell,
   getRandomPosition,
+  checkHitWall,
 }

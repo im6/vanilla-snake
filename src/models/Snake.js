@@ -19,6 +19,12 @@ class Snake {
   
   changeDirection(newDir){
     const me = this;
+    if(me.direction.x === newDir.x * -1 ||
+      me.direction.y === newDir.y * -1
+    ) {
+      return;
+    }
+
     me.direction = newDir;
   }
   
@@ -34,13 +40,29 @@ class Snake {
     };
     me.location.unshift(nextBox);
   }
+  isHitBody(){
+    const me = this;
+    let isHit = false;
+    let head = me.location[0];
+    for(let i = 3; i < me.location.length; i ++){
+      if(service.detectCollision(head, me.location[i])){
+        isHit = true;
+      }
+    }
+    return isHit;
+  }
 
-  eat(food, callback){
+  detect(food, callback){
     const me = this;
     const head = me.location[0];
     if(service.detectCollision(head, food)){
-      callback();
+      callback('food');
+    } else if(service.checkHitWall(head)){
+      callback('wall');
+    } else if(me.isHitBody()){
+      callback('body');
     }
+
   }
 }
 

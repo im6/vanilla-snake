@@ -31,7 +31,7 @@ class SnakeApp{
       y: 6,
     };
     //me.food = me.createNewFood(me.snake.location);
-
+    me.gameOver = false;
     me.render();
   }
 
@@ -45,6 +45,7 @@ class SnakeApp{
     me.ctx.fillStyle = '#f5f5f5';
     me.ctx.fillRect(0, 0, canvas_width, canvas_height);
   }
+
   addKeyboardListener(){
     const me = this;
     document.addEventListener("keydown", e => {
@@ -54,6 +55,7 @@ class SnakeApp{
       }
     });
   }
+
   createNewFood(snakeLocation){
     const me = this;
     return service.getRandomPosition(snakeLocation);
@@ -62,10 +64,21 @@ class SnakeApp{
   render(){
     const me = this;
     me.ctx.clearRect(0, 0, canvas_width, canvas_height);
+    if(me.gameOver){
+      return;
+    }
     me.snake.move(me.score);
-    me.snake.eat(me.food, () => {
-      me.score += 1;
-      me.food = me.createNewFood(me.snake.location)
+    me.snake.detect(me.food, target => {
+      if(target === 'food'){
+        me.score += 1;
+        me.food = me.createNewFood(me.snake.location);
+      } else if(target === 'wall'){
+        me.gameOver = true;
+        alert(`you hit the wall. Game over. Score: ${me.score - SNAKE_INIT_LENGTH}`);
+      } else if(target === 'body'){
+        me.gameOver = true;
+        alert(`You hit yourself, game over. Score: ${me.score - SNAKE_INIT_LENGTH}`)
+      }
     });
     service.drawSnake(me.ctx, me.snake.location);
     service.drawFood(me.ctx, me.food);
