@@ -31,5 +31,6 @@ for gaming function:
 - add confirmation if user click 'start' button before game over.
 
 
-### uploaded zip file may not be the latest version, demo site will hosting the
-latest code.
+## Note:
+Uploaded zip file may not be the latest version, demo site will host the latest code.
+Thanks for reviewing.
