@@ -17,7 +17,8 @@ npm start
 npm run build
 ```
 
-## [DEMO](http://www.javascript.fun/ss/)
+### [DEMO](http://www.javascript.fun/ss/)
+### [Source code in github](https://github.com/im6/vanilla_snake)
 
 ## To be done in next step (outside 3 hours limit)
 - add responsive for mobile device
