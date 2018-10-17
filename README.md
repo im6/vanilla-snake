@@ -17,7 +17,7 @@ npm start
 npm run build
 ```
 
-## [DEMO](http://www.javascript.fun/ss)
+## [DEMO](http://www.javascript.fun/ss/)
 
 ## To be done in next step (outside 3 hours limit)
 - add responsive for mobile device
