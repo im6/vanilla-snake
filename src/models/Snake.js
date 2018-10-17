@@ -19,8 +19,8 @@ class Snake {
   
   changeDirection(newDir){
     const me = this;
-    if(me.direction.x === newDir.x * -1 ||
-      me.direction.y === newDir.y * -1
+    if(me.previousDirection.x === newDir.x * -1 ||
+      me.previousDirection.y === newDir.y * -1
     ) {
       return;
     }
@@ -38,6 +38,9 @@ class Snake {
       x: me.location[0].x + 1 * me.direction.x,
       y: me.location[0].y + 1 * me.direction.y,
     };
+
+    me.previousDirection = me.direction;
+
     me.location.unshift(nextBox);
   }
   isHitBody(){

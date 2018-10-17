@@ -7,7 +7,8 @@ A javascript snake game with ES6 and nothing else.
 ```
 npm install
 ```
-2. Run local development on hot server
+2. Run local development on hot server, after following command,
+it should automatically open page on default browser with localhost:3000
 ```
 npm start
 ```
