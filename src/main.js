@@ -16,7 +16,8 @@ import {
 
 
 const canvas_width = CANVAS_WIDTH * BOX_SIZE,
-  canvas_height = CANVAS_HEIGHT * BOX_SIZE;
+  canvas_height = CANVAS_HEIGHT * BOX_SIZE,
+  scoreElem = document.getElementById('scoreText');
 
 class SnakeApp{
   constructor() {
@@ -60,6 +61,11 @@ class SnakeApp{
     const me = this;
     return service.getRandomPosition(snakeLocation);
   }
+  updateScore(newScore){
+    const me = this;
+    me.score = newScore;
+    scoreElem.innerText = newScore - SNAKE_INIT_LENGTH;
+  }
 
   render(){
     const me = this;
@@ -70,14 +76,14 @@ class SnakeApp{
     me.snake.move(me.score);
     me.snake.detect(me.food, target => {
       if(target === 'food'){
-        me.score += 1;
+        me.updateScore(me.score + 1);
         me.food = me.createNewFood(me.snake.location);
       } else if(target === 'wall'){
         me.gameOver = true;
-        alert(`you hit the wall. Game over. Score: ${me.score - SNAKE_INIT_LENGTH}`);
+        //alert(`you hit the wall. Game over. Score: ${me.score - SNAKE_INIT_LENGTH}`);
       } else if(target === 'body'){
         me.gameOver = true;
-        alert(`You hit yourself, game over. Score: ${me.score - SNAKE_INIT_LENGTH}`)
+        //alert(`You hit yourself, game over. Score: ${me.score - SNAKE_INIT_LENGTH}`)
       }
     });
     service.drawSnake(me.ctx, me.snake.location);
@@ -86,4 +92,4 @@ class SnakeApp{
 }
 
 const app = new SnakeApp();
-setInterval(app.render.bind(app), 1000);
+setInterval(app.render.bind(app), 300);

@@ -13,3 +13,22 @@ canvas {
   border: 5px solid #93b1c6;
   margin: 20px auto;
 }
+
+.gameUI{
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+
+  .gameText{
+    padding: 15px;
+  }
+  .gameControl{
+    padding: 10px 10px 10px 80px;
+    button{
+      padding: 8px 20px;
+    }
+    h1{
+      color: #ff7148
+    }
+  }
+}
