@@ -27,14 +27,9 @@ class SnakeApp{
     me.addKeyboardListener();
 
     me.score = null;
-    me.snake = new Snake();
-    me.food = {
-      x: 0,
-      y: 6,
-    };
-    //me.food = me.createNewFood(me.snake.location);
+    me.snake = null;
+    me.food = null;
     me.gameOver = true;
-    me.render();
   }
 
   initCanvas(){
@@ -71,6 +66,7 @@ class SnakeApp{
   showGameOver(reason){
     const me = this;
     me.ctx.font = "30px Play";
+    me.ctx.fillStyle = SNAKE_HEAD_COLOR;
     me.ctx.fillText(`You hit ${reason}, game over.`,10,50);
   }
 
@@ -96,10 +92,12 @@ class SnakeApp{
     service.drawSnake(me.ctx, me.snake.location);
     service.drawFood(me.ctx, me.food);
   }
+
   resetGame(){
     const me = this;
     me.updateScore(SNAKE_INIT_LENGTH);
     me.snake = new Snake();
+    me.food = me.createNewFood(me.snake.location); // food creation after snake created
     me.gameOver = false;
   }
 }
