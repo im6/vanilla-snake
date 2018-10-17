@@ -68,12 +68,18 @@ class SnakeApp{
     scoreElem.innerText = newScore - SNAKE_INIT_LENGTH;
   }
 
+  showGameOver(reason){
+    const me = this;
+    me.ctx.font = "30px Play";
+    me.ctx.fillText(`You hit ${reason}, game over.`,10,50);
+  }
+
   render(){
     const me = this;
-    me.ctx.clearRect(0, 0, canvas_width, canvas_height);
     if(me.gameOver){
       return;
     }
+    me.ctx.clearRect(0, 0, canvas_width, canvas_height);
     me.snake.move(me.score);
     me.snake.detect(me.food, target => {
       if(target === 'food'){
@@ -81,10 +87,10 @@ class SnakeApp{
         me.food = me.createNewFood(me.snake.location);
       } else if(target === 'wall'){
         me.gameOver = true;
-        //alert(`you hit the wall. Game over. Score: ${me.score - SNAKE_INIT_LENGTH}`);
+        me.showGameOver(target);
       } else if(target === 'body'){
         me.gameOver = true;
-        //alert(`You hit yourself, game over. Score: ${me.score - SNAKE_INIT_LENGTH}`)
+        me.showGameOver(target);
       }
     });
     service.drawSnake(me.ctx, me.snake.location);
