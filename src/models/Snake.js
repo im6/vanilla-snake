@@ -9,7 +9,7 @@ class Snake {
     const me = this;
     me.direction = INIT_DIRECTION;
     me.location = [];
-    for(let i = 0; i < SNAKE_INIT_LENGTH; i++){
+    for(let i = SNAKE_INIT_LENGTH; i > 0; i--){
       me.location.push({
         x: 0,
         y: i,

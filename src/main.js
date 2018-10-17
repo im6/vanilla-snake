@@ -107,4 +107,4 @@ const app = new SnakeApp();
 startBtnElem.addEventListener('click', e => {
   app.resetGame();
 });
-setInterval(app.render.bind(app), 300);
+setInterval(app.render.bind(app), 1000);
