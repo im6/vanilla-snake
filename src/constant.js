@@ -1,4 +1,5 @@
 
+export const GAME_INTERVAL = 400;
 export const BOX_SIZE = 20;
 
 export const CANVAS_DOM_ID = 'appCan';

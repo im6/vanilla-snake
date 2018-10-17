@@ -2,6 +2,7 @@ import './style.scss';
 import Snake from './models/Snake';
 import service from './service.js';
 import {
+  GAME_INTERVAL,
   BOX_SIZE,
   CANVAS_HEIGHT,
   CANVAS_WIDTH,
@@ -71,6 +72,20 @@ class SnakeApp{
     me.ctx.fillText(`You hit ${reason}, game over.`,10,50);
   }
 
+  onSnakeDetectError(target){
+    const me = this;
+    if(target === 'food'){
+      me.updateScore(me.score + 1);
+      me.food = me.createNewFood(me.snake.location);
+    } else if(target === 'wall'){
+      me.gameOver = true;
+      me.showGameOver(target);
+    } else if(target === 'body'){
+      me.gameOver = true;
+      me.showGameOver(target);
+    }
+  }
+
   render(){
     const me = this;
     if(me.gameOver){
@@ -78,18 +93,7 @@ class SnakeApp{
     }
     me.ctx.clearRect(0, 0, canvas_width, canvas_height);
     me.snake.move(me.score);
-    me.snake.detect(me.food, target => {
-      if(target === 'food'){
-        me.updateScore(me.score + 1);
-        me.food = me.createNewFood(me.snake.location);
-      } else if(target === 'wall'){
-        me.gameOver = true;
-        me.showGameOver(target);
-      } else if(target === 'body'){
-        me.gameOver = true;
-        me.showGameOver(target);
-      }
-    });
+    me.snake.detect(me.food, me.onSnakeDetectError.bind(me));
     service.drawSnake(me.ctx, me.snake.location);
     service.drawFood(me.ctx, me.food);
   }
@@ -107,4 +111,4 @@ const app = new SnakeApp();
 startBtnElem.addEventListener('click', e => {
   app.resetGame();
 });
-setInterval(app.render.bind(app), 1000);
+setInterval(app.render.bind(app), GAME_INTERVAL);
