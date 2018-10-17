@@ -16,3 +16,12 @@ npm start
 ```
 npm run build
 ```
+
+## (DEMO)[http://www.javascript.fun/ss]
+
+## To be done in next step (outside 3 hours limit)
+- add responsive for mobile device
+- add eslint loader for coding style
+- add css autoprefixer for old browser
+- compress js file to gzip format
+- seperate css content from js bundle file
