@@ -65,6 +65,7 @@ class SnakeApp{
 
   showGameOver(reason){
     const me = this;
+    me.ctx.clearRect(0, 0, canvas_width, canvas_height);
     me.ctx.font = "30px Play";
     me.ctx.fillStyle = SNAKE_HEAD_COLOR;
     me.ctx.fillText(`You hit ${reason}, game over.`,10,50);
