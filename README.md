@@ -29,6 +29,7 @@ npm run build
 
 for gaming function:
 - add confirmation if user click 'start' button before game over.
+- fix the game over text on canvas display, sometime overlapping with snake
 
 
 ## Note:
