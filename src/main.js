@@ -17,7 +17,8 @@ import {
 
 const canvas_width = CANVAS_WIDTH * BOX_SIZE,
   canvas_height = CANVAS_HEIGHT * BOX_SIZE,
-  scoreElem = document.getElementById('scoreText');
+  scoreElem = document.getElementById('scoreText'),
+  startBtnElem = document.getElementById('gameStartBtn');
 
 class SnakeApp{
   constructor() {
@@ -25,14 +26,14 @@ class SnakeApp{
     me.initCanvas();
     me.addKeyboardListener();
 
-    me.score = SNAKE_INIT_LENGTH;
+    me.score = null;
     me.snake = new Snake();
     me.food = {
       x: 0,
       y: 6,
     };
     //me.food = me.createNewFood(me.snake.location);
-    me.gameOver = false;
+    me.gameOver = true;
     me.render();
   }
 
@@ -89,7 +90,16 @@ class SnakeApp{
     service.drawSnake(me.ctx, me.snake.location);
     service.drawFood(me.ctx, me.food);
   }
+  resetGame(){
+    const me = this;
+    me.updateScore(SNAKE_INIT_LENGTH);
+    me.snake = new Snake();
+    me.gameOver = false;
+  }
 }
 
 const app = new SnakeApp();
+startBtnElem.addEventListener('click', e => {
+  app.resetGame();
+});
 setInterval(app.render.bind(app), 300);
