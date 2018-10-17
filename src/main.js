@@ -15,6 +15,9 @@ import {
 } from './constant';
 
 
+const canvas_width = CANVAS_WIDTH * BOX_SIZE,
+  canvas_height = CANVAS_HEIGHT * BOX_SIZE;
+
 class SnakeApp{
   constructor() {
     const me = this;
@@ -24,9 +27,10 @@ class SnakeApp{
     me.score = SNAKE_INIT_LENGTH;
     me.snake = new Snake();
     me.food = {
-      x: 10,
-      y: 10,
+      x: 0,
+      y: 6,
     };
+    //me.food = me.createNewFood(me.snake.location);
 
     me.render();
   }
@@ -34,12 +38,12 @@ class SnakeApp{
   initCanvas(){
     const me = this;
     const canvasElem = document.getElementById(CANVAS_DOM_ID);
-    canvasElem.width = CANVAS_WIDTH;
-    canvasElem.height = CANVAS_HEIGHT;
+    canvasElem.width = canvas_width;
+    canvasElem.height = canvas_height;
 
     me.ctx = canvasElem.getContext('2d');
     me.ctx.fillStyle = '#f5f5f5';
-    me.ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    me.ctx.fillRect(0, 0, canvas_width, canvas_height);
   }
   addKeyboardListener(){
     const me = this;
@@ -50,11 +54,19 @@ class SnakeApp{
       }
     });
   }
+  createNewFood(snakeLocation){
+    const me = this;
+    return service.getRandomPosition(snakeLocation);
+  }
 
   render(){
     const me = this;
-    me.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    me.ctx.clearRect(0, 0, canvas_width, canvas_height);
     me.snake.move(me.score);
+    me.snake.eat(me.food, () => {
+      me.score += 1;
+      me.food = me.createNewFood(me.snake.location)
+    });
     service.drawSnake(me.ctx, me.snake.location);
     service.drawFood(me.ctx, me.food);
   }

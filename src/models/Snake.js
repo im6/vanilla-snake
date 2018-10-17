@@ -2,6 +2,7 @@ import {
   INIT_DIRECTION,
   SNAKE_INIT_LENGTH,
 } from '../constant.js';
+import service from '../service.js';
 
 class Snake {
   constructor() {
@@ -32,6 +33,14 @@ class Snake {
       y: me.location[0].y + 1 * me.direction.y,
     };
     me.location.unshift(nextBox);
+  }
+
+  eat(food, callback){
+    const me = this;
+    const head = me.location[0];
+    if(service.detectCollision(head, food)){
+      callback();
+    }
   }
 }
 
