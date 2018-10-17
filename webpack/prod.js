@@ -2,6 +2,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   //devtool: 'cheap-module-source-map',
@@ -18,7 +19,9 @@ module.exports = {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: [
-          { loader: "style-loader", },
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
           { loader: "css-loader", },
           { loader: "sass-loader", }
         ]
@@ -42,5 +45,6 @@ module.exports = {
         NODE_ENV: JSON.stringify("production")
       }
     }),
+    new MiniCssExtractPlugin()
   ],
 };

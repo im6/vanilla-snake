@@ -25,7 +25,7 @@ npm run build
 - add eslint loader for coding style
 - add css autoprefixer for old browser
 - compress js file to gzip format
-- seperate css content from js bundle file
+- ~~seperate css content from js bundle file~~ (finished on Oct 18)
 
 for gaming function:
 - add confirmation if user click 'start' button before game over.
