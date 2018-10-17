@@ -13,11 +13,18 @@ export const SNAKE_BODY_COLOR = '#c7d0d5';
 
 export const FOOD_COLOR = '#ff7148';
 
-export const DIRECTIONS = {
+export const DIRECTIONS_LEFTHAND = {
   "65": { x: -1, y: 0 }, // a
   "68": { x: 1, y: 0 },  // d
   "87": { x: 0, y: -1 }, // w
   "83": { x: 0, y: 1 },   // s
+}; // not enabled for now
+
+export const DIRECTIONS = {
+  "37": { x: -1, y: 0 }, // left arrow
+  "39": { x: 1, y: 0 },  // right
+  "38": { x: 0, y: -1 }, // up
+  "40": { x: 0, y: 1 },   // down
 };
 
-export const INIT_DIRECTION = DIRECTIONS["83"];
+export const INIT_DIRECTION = DIRECTIONS["40"];
