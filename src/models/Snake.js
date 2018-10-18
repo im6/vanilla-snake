@@ -55,7 +55,7 @@ class Snake {
     return isHit;
   }
 
-  detect(food, callback){
+  eat(food, callback){
     const me = this;
     const head = me.location[0];
     if(service.detectCollision(head, food)){
@@ -65,7 +65,6 @@ class Snake {
     } else if(me.isHitBody()){
       callback('body');
     }
-
   }
 }
 

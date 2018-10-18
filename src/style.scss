@@ -23,4 +23,8 @@ canvas {
 #gameStartBtn {
   padding: 8px 50px;
   font-size: 1.2em;
+
+  &:focus {
+    outline: none;
+  }
 }
