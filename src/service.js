@@ -22,8 +22,6 @@ const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-
-
 // =============== export function below ==================
 
 const drawSnake = (ctx, snake) => {
@@ -52,12 +50,12 @@ const checkHitWall = (point) => {
   return isHit;
 };
 
-const getRandomPosition = (snake) => {
+const createNewFood = (snake) => {
   const position = {
     x: getRandomNumber(0, CANVAS_WIDTH - 1),
     y: getRandomNumber(0, CANVAS_HEIGHT - 1),
   };
-  return isEmptyCell(position, snake) ? position : getRandomPosition(snake);
+  return isEmptyCell(position, snake) ? position : createNewFood(snake);
 };
 
 export default {
@@ -65,6 +63,6 @@ export default {
   drawFood,
   detectCollision,
   isEmptyCell,
-  getRandomPosition,
   checkHitWall,
+  createNewFood,
 }

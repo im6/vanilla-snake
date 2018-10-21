@@ -52,9 +52,6 @@ class SnakeApp{
     });
   }
 
-  createNewFood(snakeLocation){
-    return service.getRandomPosition(snakeLocation);
-  }
   updateScore(newScore){
     const me = this;
     me.score = newScore;
@@ -73,7 +70,7 @@ class SnakeApp{
     const me = this;
     if(target === 'food'){
       me.updateScore(me.score + 1);
-      me.food = me.createNewFood(me.snake.location);
+      me.food = service.createNewFood(me.snake.location);
     } else if(target === 'wall'){
       me.gameOver = true;
       me.showGameOver(target);
@@ -99,7 +96,10 @@ class SnakeApp{
     const me = this;
     me.updateScore(SNAKE_INIT_LENGTH);
     me.snake = new Snake();
-    me.food = me.createNewFood(me.snake.location); // food creation after snake created
+
+    // food need create after snake initialized
+    me.food = service.createNewFood(me.snake.location);
+
     me.gameOver = false;
   }
 }
