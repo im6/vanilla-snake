@@ -34,20 +34,21 @@ class Snake {
       me.location.pop();
     }
 
+    const head = me.location[0];
     const nextBox = {
-      x: me.location[0].x + 1 * me.direction.x,
-      y: me.location[0].y + 1 * me.direction.y,
+      x: head.x + me.direction.x,
+      y: head.y + me.direction.y,
     };
 
     me.previousDirection = me.direction;
-
     me.location.unshift(nextBox);
   }
+
   isHitBody(){
     const me = this;
     let isHit = false;
-    let head = me.location[0];
-    for(let i = 4; i < me.location.length; i ++){
+    const head = me.location[0];
+    for(let i = 4; i < me.location.length; i ++){  // head cannot hit index in [1,2,3]
       if(service.detectCollision(head, me.location[i])){
         isHit = true;
       }
