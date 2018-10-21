@@ -24,11 +24,20 @@ class SnakeApp{
     me.addKeyboardListener();
 
     Object.assign(me, {
-      score: null,
+      _score: null,
       snake: null,
       food: null,
       gameOver: true,
     });
+  }
+
+  get score() {
+    return this._score;
+  }
+
+  set score(value) {
+    scoreElem.innerText = value - SNAKE_INIT_LENGTH;
+    this._score = value;
   }
 
   initCanvas(){
@@ -52,12 +61,6 @@ class SnakeApp{
     });
   }
 
-  updateScore(newScore){
-    const me = this;
-    me.score = newScore;
-    scoreElem.innerText = newScore - SNAKE_INIT_LENGTH;
-  }
-
   showGameOver(reason){
     const me = this;
     me.ctx.clearRect(0, 0, canvas_width, canvas_height);
@@ -69,7 +72,7 @@ class SnakeApp{
   onSnakeEatCheck(target){
     const me = this;
     if(target === 'food'){
-      me.updateScore(me.score + 1);
+      me.score += 1;
       me.food = service.createNewFood(me.snake.location);
     } else if(target === 'wall'){
       me.gameOver = true;
@@ -94,12 +97,11 @@ class SnakeApp{
 
   resetGame(){
     const me = this;
-    me.updateScore(SNAKE_INIT_LENGTH);
+    me.score = SNAKE_INIT_LENGTH;
     me.snake = new Snake();
 
     // food need create after snake initialized
     me.food = service.createNewFood(me.snake.location);
-
     me.gameOver = false;
   }
 }

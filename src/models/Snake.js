@@ -16,6 +16,10 @@ class Snake {
       });
     }
   }
+
+  get head() {
+    return this.location[0];
+  }
   
   changeDirection(newDir){
     const me = this;
@@ -34,10 +38,9 @@ class Snake {
       me.location.pop();
     }
 
-    const head = me.location[0];
     const nextBox = {
-      x: head.x + me.direction.x,
-      y: head.y + me.direction.y,
+      x: me.head.x + me.direction.x,
+      y: me.head.y + me.direction.y,
     };
 
     me.previousDirection = me.direction;
@@ -47,9 +50,8 @@ class Snake {
   isHitBody(){
     const me = this;
     let isHit = false;
-    const head = me.location[0];
     for(let i = 4; i < me.location.length; i ++){  // head cannot hit index in [1,2,3]
-      if(service.detectCollision(head, me.location[i])){
+      if(service.detectCollision(me.head, me.location[i])){
         isHit = true;
       }
     }
@@ -58,10 +60,9 @@ class Snake {
 
   eat(food, callback){
     const me = this;
-    const head = me.location[0];
-    if(service.detectCollision(head, food)){
+    if(service.detectCollision(me.head, food)){
       callback('food');
-    } else if(service.checkHitWall(head)){
+    } else if(service.checkHitWall(me.head)){
       callback('wall');
     } else if(me.isHitBody()){
       callback('body');
