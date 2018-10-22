@@ -50,7 +50,7 @@ class Snake {
   isHitBody(){
     const me = this;
     let isHit = false;
-    for(let i = 4; i < me.location.length; i ++){  // head cannot hit index in [1,2,3]
+    for(let i = 4; i < me.location.length; i ++) {  // head cannot hit index in [1,2,3]
       if(service.detectCollision(me.head, me.location[i])){
         isHit = true;
       }
@@ -61,11 +61,11 @@ class Snake {
   eat(food, callback){
     const me = this;
     if(service.detectCollision(me.head, food)){
-      callback('food');
+      callback(false);
     } else if(service.checkHitWall(me.head)){
-      callback('wall');
+      callback(true, 'wall');
     } else if(me.isHitBody()){
-      callback('body');
+      callback(true, 'body');
     }
   }
 }

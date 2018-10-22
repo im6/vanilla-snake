@@ -69,17 +69,14 @@ class SnakeApp{
     me.ctx.fillText(`You hit ${reason}, game over.`,10,50);
   }
 
-  onSnakeEatCheck(target){
+  onSnakeEatCheck(error, errorObj){
     const me = this;
-    if(target === 'food'){
+    if(error){
+      me.gameOver = true;
+      me.showGameOver(errorObj);
+    } else {
       me.score += 1;
       me.food = service.createNewFood(me.snake.location);
-    } else if(target === 'wall'){
-      me.gameOver = true;
-      me.showGameOver(target);
-    } else if(target === 'body'){
-      me.gameOver = true;
-      me.showGameOver(target);
     }
   }
 
