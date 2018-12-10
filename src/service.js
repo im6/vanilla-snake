@@ -58,6 +58,16 @@ const createNewFood = (snake) => {
   return isEmptyCell(position, snake) ? position : createNewFood(snake);
 };
 
+const checkHeadHitBody = (head, body) => {
+  let willHit = false;
+  for(let i = 3; i < body.length; i ++) {  // head cannot hit index in [0,1,2]
+    if(detectCollision(head, body[i])){
+      willHit = true;
+    }
+  }
+  return willHit;
+};
+
 export default {
   drawSnake,
   drawFood,
@@ -65,4 +75,5 @@ export default {
   isEmptyCell,
   checkHitWall,
   createNewFood,
+  checkHeadHitBody,
 }
