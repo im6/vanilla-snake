@@ -60,18 +60,14 @@ class SnakeApp{
 
   detectNext(){
     const me = this;
-    const nextHead = {
-      x: me.snake.head.x + me.snake.direction.x,
-      y: me.snake.head.y + me.snake.direction.y,
-    };
     let res = null;
-    if(service.detectCollision(nextHead, me.food)){
+    if(service.detectCollision(me.snake.nextHead, me.food)){
       me.snake.eat();
       me.food = service.createNewFood(me.snake.location);
       scoreElem.innerText = me.snake.score;
-    } else if(service.checkHitWall(nextHead)){
+    } else if(service.checkHitWall(me.snake.nextHead)){
       res = 'wall';
-    } else if(service.checkHeadHitBody(nextHead, me.snake.location)){
+    } else if(service.checkHeadHitBody(me.snake.nextHead, me.snake.location)){
       res = 'body';
     }
 

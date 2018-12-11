@@ -8,7 +8,7 @@ class Snake {
   constructor() {
     const me = this;
     me.direction = INIT_DIRECTION;
-    me._score = 0;
+    me._score = SNAKE_INIT_LENGTH;
     me.location = [];
     for(let i = SNAKE_INIT_LENGTH; i > 0; i--){
       me.location.push({
@@ -18,12 +18,17 @@ class Snake {
     }
   }
 
-  get head() {
-    return this.location[0];
+  get nextHead() {
+    const me = this;
+    const head = me.location[0];
+    return {
+      x: head.x + me.direction.x,
+      y: head.y + me.direction.y,
+    }
   }
 
   get score(){
-    return this._score;
+    return this._score - SNAKE_INIT_LENGTH;
   }
 
   changeDirection(newDir){
@@ -39,17 +44,12 @@ class Snake {
   
   move() {
     const me = this;
-    if (me._score + SNAKE_INIT_LENGTH === me.location.length) {
+    if (me._score === me.location.length) {
       me.location.pop();
     }
 
-    const nextBox = {
-      x: me.head.x + me.direction.x,
-      y: me.head.y + me.direction.y,
-    };
-
     me.previousDirection = me.direction;
-    me.location.unshift(nextBox);
+    me.location.unshift(me.nextHead);
   }
 
   eat(){
