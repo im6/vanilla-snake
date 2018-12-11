@@ -84,16 +84,18 @@ class SnakeApp{
     if(me.gameOver){
       return;
     }
+
     const detectResult = me.detectNext();
     if(detectResult){
       me.gameOver = true;
       me.showGameOver(detectResult);
-    } else {
-      me.ctx.clearRect(0, 0, canvas_width, canvas_height);
-      me.snake.move();
-      service.drawSnake(me.ctx, me.snake.location);
-      service.drawFood(me.ctx, me.food);
+      return;
     }
+
+    me.ctx.clearRect(0, 0, canvas_width, canvas_height);
+    me.snake.move();
+    service.drawSnake(me.ctx, me.snake.location);
+    service.drawFood(me.ctx, me.food);
   }
 
   resetGame(){

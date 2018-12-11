@@ -8,6 +8,7 @@ class Snake {
   constructor() {
     const me = this;
     me.direction = INIT_DIRECTION;
+    me.previousDirection = null;
     me._score = SNAKE_INIT_LENGTH;
     me.location = [];
     for(let i = SNAKE_INIT_LENGTH; i > 0; i--){
