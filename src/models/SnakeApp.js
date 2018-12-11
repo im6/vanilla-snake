@@ -14,13 +14,14 @@ import {
 
 const canvas_width = CANVAS_WIDTH * BOX_SIZE,
   canvas_height = CANVAS_HEIGHT * BOX_SIZE,
+  startBtnElem = document.getElementById('gameStartBtn'),
   scoreElem = document.getElementById('scoreText');
 
 class SnakeApp{
   constructor() {
     const me = this;
     me.initCanvas();
-    me.addKeyboardListener();
+    me.addAppListener();
 
     Object.assign(me, {
       snake: null,
@@ -40,13 +41,17 @@ class SnakeApp{
     me.ctx.fillRect(0, 0, canvas_width, canvas_height);
   }
 
-  addKeyboardListener(){
+  addAppListener(){
     const me = this;
     document.addEventListener("keydown", e => {
       const { keyCode } = e;
       if(keyCode in DIRECTIONS && !me.gameOver){
         me.snake.changeDirection(DIRECTIONS[keyCode]);
       }
+    });
+
+    startBtnElem.addEventListener('click', e => {
+      me.resetGame();
     });
   }
 
