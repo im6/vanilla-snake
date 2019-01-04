@@ -6,10 +6,7 @@ import {
   CANVAS_WIDTH,
   CANVAS_DOM_ID,
   SNAKE_HEAD_COLOR,
-  SNAKE_BODY_COLOR,
   DIRECTIONS,
-  INIT_DIRECTION,
-  FOOD_COLOR,
 } from '../constant';
 
 const canvas_width = CANVAS_WIDTH * BOX_SIZE,
