@@ -6,13 +6,13 @@ import service from '../service.js';
 
 class Snake {
   constructor() {
-    const me = this;
-    me.direction = INIT_DIRECTION;
-    me.previousDirection = null;
-    me._score = SNAKE_INIT_LENGTH;
-    me.location = [];
+    const self = this;
+    self.direction = INIT_DIRECTION;
+    self.previousDirection = null;
+    self._score = SNAKE_INIT_LENGTH;
+    self.location = [];
     for(let i = SNAKE_INIT_LENGTH; i > 0; i--){
-      me.location.push({
+      self.location.push({
         x: 0,
         y: i,
       });
@@ -20,11 +20,11 @@ class Snake {
   }
 
   get nextHead() {
-    const me = this;
-    const head = me.location[0];
+    const self = this;
+    const head = self.location[0];
     return {
-      x: head.x + me.direction.x,
-      y: head.y + me.direction.y,
+      x: head.x + self.direction.x,
+      y: head.y + self.direction.y,
     }
   }
 
@@ -33,29 +33,29 @@ class Snake {
   }
 
   changeDirection(newDir){
-    const me = this;
-    if(me.previousDirection.x === newDir.x * -1 ||
-      me.previousDirection.y === newDir.y * -1
+    const self = this;
+    if(self.previousDirection.x === newDir.x * -1 ||
+      self.previousDirection.y === newDir.y * -1
     ) {
       return;
     }
 
-    me.direction = newDir;
+    self.direction = newDir;
   }
   
   move() {
-    const me = this;
-    if (me._score === me.location.length) {
-      me.location.pop();
+    const self = this;
+    if (self._score === self.location.length) {
+      self.location.pop();
     }
 
-    me.previousDirection = me.direction;
-    me.location.unshift(me.nextHead);
+    self.previousDirection = self.direction;
+    self.location.unshift(self.nextHead);
   }
 
   eat(){
-    const me = this;
-    me._score += 1;
+    const self = this;
+    self._score += 1;
   }
 }
 
