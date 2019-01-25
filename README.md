@@ -1,38 +1,32 @@
-# Vanilla Snake Game
+# Snake Game
 
-A javascript snake game with ES6 and nothing else.
+A javascript snake game
+
+1. Vanilla Javascript version
+1. RxJS version
 
 ## cli instructions
+
 1. Install all dependency for development
-```
+
+```sh
 npm install
 ```
-2. Run local development on hot server, after following command,
+
+1. Run local development on hot server, after following command
+
 it should automatically open page on default browser with localhost:3000
-```
+
+```sh
 npm start
 ```
-3. Make a production build with minification
-```
+
+1. Make a production build with minification
+
+```sh
 npm run build
 ```
 
 ### [DEMO](http://www.javascript.fun/ss/)
+
 ### [Source code in github](https://github.com/im6/vanilla_snake)
-
-## To be done in next step (outside 3 hours limit)
-- add responsive for mobile device
-- add eslint loader for coding style
-- add css autoprefixer for old browser
-- compress js file to gzip format
-- ~~seperate css content from js bundle file~~ (finished on Oct 18)
-
-for gaming function:
-- add confirmation if user click 'start' button before game over.
-- fix the game over text on canvas display, sometime overlapping with snake
-
-
-## Note:
-Uploaded zip file may not be the latest version, demo site will host the latest code.
-
-Thanks for reviewing.

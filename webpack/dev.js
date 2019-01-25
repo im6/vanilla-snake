@@ -7,7 +7,7 @@ module.exports = {
   mode: "development",
   devtool: 'source-map',
   entry: [
-    './src/main.js',
+    `./src/${process.env.app}/main.js`,
     'webpack/hot/only-dev-server',
     'webpack-dev-server/client?http://localhost:3000',
   ],

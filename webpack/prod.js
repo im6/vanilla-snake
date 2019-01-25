@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   //devtool: 'cheap-module-source-map',
   mode: 'production',
-  entry: './src/main.js',
+  entry: `./src/${process.env.app}/main.js`,
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, `../public`),
