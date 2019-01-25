@@ -1,8 +1,7 @@
 import {
   INIT_DIRECTION,
   SNAKE_INIT_LENGTH,
-} from '../constant.js';
-import service from '../service.js';
+} from '../../constant.js';
 
 class Snake {
   constructor() {

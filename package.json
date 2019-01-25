@@ -4,7 +4,8 @@
   "description": "A snake game with vanilla javascript",
   "main": "/src/main.js",
   "scripts": {
-    "start": "app=reactivex webpack-dev-server --progress --open --profile --colors --config webpack/dev.js",
+    "start": "app=vanilla webpack-dev-server --progress --open --profile --colors --config webpack/dev.js",
+    "rxjs": "app=reactivex webpack-dev-server --progress --open --profile --colors --config webpack/dev.js",
     "build": "webpack --config webpack/prod.js"
   },
   "repository": {
@@ -30,11 +31,12 @@
     "css-loader": "^1.0.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.9.4",
+    "rxjs": "^6.3.3",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9"
+    "webpack-dev-server": "^3.1.14"
   }
 }

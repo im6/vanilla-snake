@@ -5,7 +5,7 @@ import {
   SNAKE_HEAD_COLOR,
   SNAKE_BODY_COLOR,
   FOOD_COLOR,
-} from './constant.js'
+} from '../constant.js'
 
 // =============== private scope function ================
 
