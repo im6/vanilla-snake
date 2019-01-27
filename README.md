@@ -1,9 +1,9 @@
 # Snake Game
 
-A javascript snake game
+A javascript snake game, 2 versions written by two seperate frameworks.
 
-1. Vanilla Javascript version
-1. RxJS version
+1. Vanilla Javascript
+1. RxJS
 
 ## cli instructions
 
@@ -18,15 +18,10 @@ npm install
 it should automatically open page on default browser with localhost:3000
 
 ```sh
-npm start
+npm run vanilla // run vanilla js version
+npm run rxjs // run rxjs version
 ```
 
-1. Make a production build with minification
+### [vanilla DEMO](http://www.javascript.fun/snake/vanilla)
 
-```sh
-npm run build
-```
-
-### [DEMO](http://www.javascript.fun/ss/)
-
-### [Source code in github](https://github.com/im6/vanilla_snake)
+### [rxjs DEMO](http://www.javascript.fun/snake/rxjs)

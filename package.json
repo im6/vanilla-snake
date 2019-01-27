@@ -4,7 +4,8 @@
   "description": "A snake game with vanilla javascript",
   "main": "/src/main.js",
   "scripts": {
-    "start": "app=vanilla webpack-dev-server --progress --open --profile --colors --config webpack/dev.js",
+    "start": "app=reactivex webpack-dev-server --progress --open --profile --colors --config webpack/dev.js",
+    "vanilla": "app=vanilla webpack-dev-server --progress --open --profile --colors --config webpack/dev.js",
     "rxjs": "app=reactivex webpack-dev-server --progress --open --profile --colors --config webpack/dev.js",
     "build": "webpack --config webpack/prod.js"
   },
