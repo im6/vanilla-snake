@@ -1,14 +1,25 @@
+//https://github.com/thoughtram/reactive-snake/blob/master/src/main.ts
 import '../style.scss';
-import { fromEvent } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { 
+  fromEvent,
+  interval, 
+} from 'rxjs';
+import { map, filter, take } from 'rxjs/operators';
+import { DIRECTIONS } from '../constant';
 
 const canvas = document.getElementById('appCan');
 const ctx = canvas.getContext('2d');
 
-const keyboardEvent = fromEvent(document, 'keydown')
+const keyboardSource = fromEvent(document, 'keydown').pipe(
+  map(({ keyCode }) => DIRECTIONS[keyCode])
+);
 
-keyboardEvent.subscribe({
-  next: x => console.log('got value ' + x),
-  error: err => console.error('something wrong occurred: ' + err),
-  complete: () => console.log('done'),
+const clockSource = interval(10);
+const takeFour = clockSource.pipe(take(4));
+keyboardSource.subscribe(c => {
+  console.log(c);
+});
+
+takeFour.subscribe(c => {
+  console.log(c);
 });
