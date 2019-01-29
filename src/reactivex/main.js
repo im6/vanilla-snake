@@ -42,14 +42,17 @@ const keyboardSource = fromEvent(document, 'keydown').pipe(
   distinctUntilChanged(), // change on curve
 );
 
-const lengthSource = new BehaviorSubject(SNAKE_INIT_LENGTH);
-const scoreSource = lengthSource.pipe(
-  scan((prev, next) => prev + next),
+const lenSrc = new BehaviorSubject(SNAKE_INIT_LENGTH);
+const snakeLenSrc = lenSrc.pipe(
+  scan((prev, next) => prev + 1),
   share()
 );
+const scoreSrc = snakeLenSrc.pipe(
+  startWith(0),
+  scan((prev, next) => prev + 1)
+)
 
-const clockSource = interval(10);
-const takeFour = clockSource.pipe(take(4));
+const tickSrc = interval(1000);
 
 
 
@@ -58,10 +61,13 @@ keyboardSource.subscribe(c => {
   //console.log(c);
 });
 
-takeFour.subscribe(c => {
-  //console.log(c);
+snakeLenSrc.subscribe(c => {
+  console.log('snake: ', c);
+});
+scoreSrc.subscribe(c => {
+  console.log('score: ', c);
 });
 
-scoreSource.subscribe(c => {
-  console.log(c);
+tickSrc.subscribe(c => {
+  console.log('tick: ', c);
 });
