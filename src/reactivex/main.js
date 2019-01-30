@@ -16,6 +16,7 @@ import {
   scan,
   distinctUntilChanged,
   share,
+  withLatestFrom,
  } from 'rxjs/operators';
 import { 
   DIRECTIONS, 
@@ -26,6 +27,14 @@ import {
 const canvas = document.getElementById('appCan');
 const ctx = canvas.getContext('2d');
 
+const generateSnake = ()=>{
+  let snake = [];
+  for (let i = SNAKE_INIT_LENGTH - 1; i >= 0; i--) {
+    snake.push({ x: i, y: 0 });
+  }
+  return snake;
+}
+
 const nextDirection = (prev, next)=> {
   if(prev.x === next.x * -1 || prev.y === next.y * -1){
     return prev;
@@ -34,7 +43,7 @@ const nextDirection = (prev, next)=> {
   }
 }
 
-const keyboardSource = fromEvent(document, 'keydown').pipe(
+const direction$ = fromEvent(document, 'keydown').pipe(
   map(({ keyCode }) => DIRECTIONS[keyCode]),
   startWith(INIT_DIRECTION),
   filter(d => !!d), // ignore other keydown
@@ -42,32 +51,38 @@ const keyboardSource = fromEvent(document, 'keydown').pipe(
   distinctUntilChanged(), // change on curve
 );
 
-const lenSrc = new BehaviorSubject(SNAKE_INIT_LENGTH);
-const snakeLenSrc = lenSrc.pipe(
+const len$ = new BehaviorSubject(SNAKE_INIT_LENGTH);
+const snakeLen$ = len$.pipe(
   scan((prev, next) => prev + 1),
   share()
 );
-const scoreSrc = snakeLenSrc.pipe(
+const score$ = snakeLen$.pipe(
   startWith(0),
   scan((prev, next) => prev + 1)
 )
 
-const tickSrc = interval(1000);
+const ticks$ = interval(1000);
+let snake$ = ticks$.pipe(
+  withLatestFrom(direction$, len$, (_, direction, snakeLength) => [direction, snakeLength]),
+  scan(function(a, b){
+    debugger;
+  }, generateSnake()),
+  share());
 
 
 
 
-keyboardSource.subscribe(c => {
+direction$.subscribe(c => {
   //console.log(c);
 });
 
-snakeLenSrc.subscribe(c => {
-  console.log('snake: ', c);
+snakeLen$.subscribe(c => {
+  console.log('snakeLen: ', c);
 });
-scoreSrc.subscribe(c => {
+score$.subscribe(c => {
   console.log('score: ', c);
 });
 
-tickSrc.subscribe(c => {
-  console.log('tick: ', c);
+snake$.subscribe(c => {
+  console.log('ticks: ', c);
 });
