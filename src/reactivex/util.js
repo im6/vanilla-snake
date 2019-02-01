@@ -1,4 +1,7 @@
-
+import {
+  SNAKE_INIT_LENGTH,
+ } from '../constant';
+ 
 export const initSnake = () => {
   let snake = [];
   for (let i = SNAKE_INIT_LENGTH; i > 0; i--) {
