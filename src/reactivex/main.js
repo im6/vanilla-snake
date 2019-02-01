@@ -24,16 +24,13 @@ import {
   SNAKE_INIT_LENGTH,
  } from '../constant';
 
+import { 
+  move,
+  initSnake,
+} from './util';
+
 const canvas = document.getElementById('appCan');
 const ctx = canvas.getContext('2d');
-
-const generateSnake = ()=>{
-  let snake = [];
-  for (let i = SNAKE_INIT_LENGTH - 1; i >= 0; i--) {
-    snake.push({ x: i, y: 0 });
-  }
-  return snake;
-}
 
 const nextDirection = (prev, next)=> {
   if(prev.x === next.x * -1 || prev.y === next.y * -1){
@@ -64,13 +61,8 @@ const score$ = snakeLen$.pipe(
 const ticks$ = interval(1000);
 let snake$ = ticks$.pipe(
   withLatestFrom(direction$, len$, (_, direction, snakeLength) => [direction, snakeLength]),
-  scan(function(a, b){
-    debugger;
-  }, generateSnake()),
+  scan(move, initSnake()),
   share());
-
-
-
 
 direction$.subscribe(c => {
   //console.log(c);
