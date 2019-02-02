@@ -14,11 +14,13 @@ export const move = (snake, [direction, len]) => {
   let nx = snake[0].x + direction.x;
   let ny = snake[0].y + direction.y;
 
-  let tail = null;
-  if(len > snake.length){
-
-  } else {
-
+  let tail = {
+    x: nx,
+    y: ny,
+  };
+  if(snake.length > len){
+    snake.pop()
   }
+  snake.unshift(tail);
   return snake;
 }

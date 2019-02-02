@@ -3,7 +3,7 @@
 // https://blog.thoughtram.io/rxjs/2017/08/24/taming-snakes-with-reactive-streams.html
 
 import '../style.scss';
-import { 
+import {
   fromEvent,
   interval,
   BehaviorSubject, 
