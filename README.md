@@ -22,6 +22,6 @@ npm run vanilla // run vanilla js version
 npm run rxjs // run rxjs version
 ```
 
-### [vanilla DEMO](http://www.javascript.fun/snake/vanilla)
+### [vanilla DEMO](http://www.javascript.fun/demo/snake/vanilla/)
 
-### [rxjs DEMO](http://www.javascript.fun/snake/rxjs)
+### [rxjs DEMO](http://www.javascript.fun/demo/snake/rxjs/)

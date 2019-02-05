@@ -69,12 +69,12 @@ direction$.subscribe(c => {
 });
 
 snakeLen$.subscribe(c => {
-  console.log('snakeLen: ', c);
+  //console.log('snakeLen: ', c);
 });
 score$.subscribe(c => {
   console.log('score: ', c);
 });
 
 snake$.subscribe(c => {
-  console.log('ticks: ', c);
+  console.log('snake: ', c);
 });
