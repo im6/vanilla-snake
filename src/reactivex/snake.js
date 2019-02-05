@@ -20,27 +20,28 @@ export const initApple = () => {
 }
 
 export const move = (snake, [direction, len]) => {
-  let nx = snake[0].x + direction.x;
-  let ny = snake[0].y + direction.y;
-
-  let nextHead = {
-    x: nx,
-    y: ny,
+  const nextHead = {
+    x: snake[0].x + direction.x,
+    y: snake[0].y + direction.y,
   };
+
   if(snake.length > len){
     snake.pop()
   }
+
   snake.unshift(nextHead);
   return snake;
 }
 
 export const eat = (apple, snake) => {
   const head = snake[0];
-  for(let i = 0; i < apple.length; i ++){
-    if(checkCollision(apple[i], head)){
-      apple.slice(i, 1);
-      return [...apple, getRandomPosition(snake)];
-    }
+  if(snake.some(v => checkCollision(apple, head))){
+    return getRandomPosition();
+  } else {
+    return apple;
   }
-  return apple;
+}
+
+export const nextDirection = (prev, next)=> {
+  return (prev.x === next.x * -1 || prev.y === next.y * -1) ? prev: next;
 }
