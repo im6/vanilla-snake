@@ -25,9 +25,11 @@ import {
  } from '../constant';
 
 import { 
+  eat,
   move,
   initSnake,
-} from './util';
+  initApple
+} from './snake';
 
 const canvas = document.getElementById('appCan');
 const ctx = canvas.getContext('2d');
@@ -59,10 +61,17 @@ const score$ = snakeLen$.pipe(
 )
 
 const ticks$ = interval(1000);
-let snake$ = ticks$.pipe(
+const snake$ = ticks$.pipe(
   withLatestFrom(direction$, len$, (_, direction, snakeLength) => [direction, snakeLength]),
   scan(move, initSnake()),
   share());
+
+const apple$ = snake$.pipe(
+  scan(eat, initApple()),
+  distinctUntilChanged(),
+  share()
+);
+
 
 direction$.subscribe(c => {
   //console.log(c);
@@ -72,9 +81,13 @@ snakeLen$.subscribe(c => {
   //console.log('snakeLen: ', c);
 });
 score$.subscribe(c => {
-  console.log('score: ', c);
+  //console.log('score: ', c);
 });
 
 snake$.subscribe(c => {
-  console.log('snake: ', c);
+  //console.log('snake: ', c);
+});
+
+apple$.subscribe(c => {
+  console.log('apple: ', c);
 });
