@@ -4,20 +4,23 @@
 
 import '../style.scss';
 import {
+  of,
   fromEvent,
   interval,
   BehaviorSubject, 
+  animationFrameScheduler,
 } from 'rxjs';
 import { 
   map, 
-  filter, 
   take,
-  startWith,
   scan,
-  distinctUntilChanged,
+  filter, 
   share,
-  withLatestFrom,
+  switchMap,
+  startWith,
   combineLatest,
+  withLatestFrom,
+  distinctUntilChanged,
  } from 'rxjs/operators';
 import { 
   DIRECTIONS, 
@@ -68,14 +71,20 @@ const apple$ = snake$.pipe(
   share(),
 );
 
-const scene = combineLatest(snake$, apple$, score$, (snake, apple, score) => ({snake, apple, score}));
+const scene$ = combineLatest(snake$, apple$, score$, (snake, apple, score) => ({snake, apple, score}));
+
+const game$ = of('start game').pipe(
+  map(a => {
+    return interval(1000 / 2, animationFrameScheduler);
+  }),
+  switchMap((obs, n) => {
+    debugger;
+    return obs;
+  })
+);
 
 
 
-snake$.subscribe(c => {
+game$.subscribe(c => {
   //console.log('snake: ', c);
-});
-
-apple$.subscribe(c => {
-  console.log('apple: ', c);
 });
