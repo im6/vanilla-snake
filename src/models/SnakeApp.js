@@ -7,7 +7,7 @@ import {
   CANVAS_DOM_ID,
   SNAKE_HEAD_COLOR,
   DIRECTIONS,
-} from '../../constant';
+} from '../constant';
 
 const canvas_width = CANVAS_WIDTH * BOX_SIZE,
   canvas_height = CANVAS_HEIGHT * BOX_SIZE,

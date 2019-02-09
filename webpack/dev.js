@@ -7,7 +7,7 @@ module.exports = {
   mode: "development",
   devtool: 'source-map',
   entry: [
-    `./src/${process.env.app}/main.js`,
+    `./src/main.js`,
     'webpack/hot/only-dev-server',
     'webpack-dev-server/client?http://localhost:3000',
   ],
@@ -55,5 +55,6 @@ module.exports = {
     inline: true,
     port: "3000",
     host: "localhost",
+    open: 'Google Chrome',
   }
 };

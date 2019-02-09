@@ -1,7 +1,7 @@
 import {
   INIT_DIRECTION,
   SNAKE_INIT_LENGTH,
-} from '../../constant.js';
+} from '../constant.js';
 
 class Snake {
   constructor() {
