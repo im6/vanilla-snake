@@ -1,5 +1,5 @@
 import Snake from './Snake';
-import service from '../service.js';
+import service from '../service';
 import {
   BOX_SIZE,
   CANVAS_HEIGHT,
@@ -9,97 +9,89 @@ import {
   DIRECTIONS,
 } from '../constant';
 
-const canvas_width = CANVAS_WIDTH * BOX_SIZE,
-  canvas_height = CANVAS_HEIGHT * BOX_SIZE,
-  startBtnElem = document.getElementById('gameStartBtn'),
-  scoreElem = document.getElementById('scoreText');
+const canvasWidth = CANVAS_WIDTH * BOX_SIZE;
+const canvasHeight = CANVAS_HEIGHT * BOX_SIZE;
+const startBtnElem = document.getElementById('gameStartBtn');
+const scoreElem = document.getElementById('scoreText');
 
-class SnakeApp{
+class SnakeApp {
   constructor() {
-    const self = this;
-    self.initCanvas();
-    self.addAppListener();
+    this.initCanvas();
+    this.addAppListener();
 
-    self.snake = null;
-    self.food = null;
-    self.gameOver = true;
+    this.snake = null;
+    this.food = null;
+    this.gameOver = true;
   }
 
-  initCanvas(){
-    const self = this;
+  initCanvas() {
     const canvasElem = document.getElementById(CANVAS_DOM_ID);
-    canvasElem.width = canvas_width;
-    canvasElem.height = canvas_height;
+    canvasElem.width = canvasWidth;
+    canvasElem.height = canvasHeight;
 
-    self.ctx = canvasElem.getContext('2d');
-    self.ctx.fillStyle = '#f5f5f5';
-    self.ctx.fillRect(0, 0, canvas_width, canvas_height);
+    this.ctx = canvasElem.getContext('2d');
+    this.ctx.fillStyle = '#f5f5f5';
+    this.ctx.fillRect(0, 0, canvasWidth, canvasHeight);
   }
 
-  addAppListener(){
-    const self = this;
-    document.addEventListener("keydown", e => {
+  addAppListener() {
+    document.addEventListener('keydown', (e) => {
       const { keyCode } = e;
-      if(keyCode in DIRECTIONS && !self.gameOver){
-        self.snake.changeDirection(DIRECTIONS[keyCode]);
+      if (keyCode in DIRECTIONS && !this.gameOver) {
+        this.snake.changeDirection(DIRECTIONS[keyCode]);
       }
     });
 
-    startBtnElem.addEventListener('click', e => {
-      self.resetGame();
+    startBtnElem.addEventListener('click', () => {
+      this.resetGame();
     });
   }
 
-  showGameOver(reason){
-    const self = this;
-    //self.ctx.clearRect(0, 0, canvas_width, canvas_height);
-    self.ctx.font = "30px Play";
-    self.ctx.fillStyle = SNAKE_HEAD_COLOR;
-    self.ctx.fillText(`You hit ${reason}, game over.`,10,50);
+  showGameOver(reason) {
+    // this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.ctx.font = '30px Play';
+    this.ctx.fillStyle = SNAKE_HEAD_COLOR;
+    this.ctx.fillText(`You hit ${reason}, game over.`, 10, 50);
   }
 
-  detectNext(){
-    const self = this;
+  detectNext() {
     let res = null;
-    if(service.detectCollision(self.snake.nextHead, self.food)){
-      self.snake.eat();
-      self.food = service.createNewFood(self.snake.location);
-      scoreElem.innerText = self.snake.score;
-    } else if(service.checkHitWall(self.snake.nextHead)){
+    if (service.detectCollision(this.snake.nextHead, this.food)) {
+      this.snake.eat();
+      this.food = service.createNewFood(this.snake.location);
+      scoreElem.innerText = this.snake.score;
+    } else if (service.checkHitWall(this.snake.nextHead)) {
       res = 'wall';
-    } else if(service.checkHeadHitBody(self.snake.nextHead, self.snake.location)){
+    } else if (service.checkHeadHitBody(this.snake.nextHead, this.snake.location)) {
       res = 'body';
     }
-
     return res;
   }
 
-  render(){
-    const self = this;
-    if(self.gameOver){
+  render() {
+    if (this.gameOver) {
       return;
     }
 
-    const detectResult = self.detectNext();
-    if(detectResult){
-      self.gameOver = true;
-      self.showGameOver(detectResult);
+    const detectResult = this.detectNext();
+    if (detectResult) {
+      this.gameOver = true;
+      this.showGameOver(detectResult);
       return;
     }
 
-    self.ctx.clearRect(0, 0, canvas_width, canvas_height);
-    self.snake.move();
-    service.drawSnake(self.ctx, self.snake.location);
-    service.drawFood(self.ctx, self.food);
+    this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.snake.move();
+    service.drawSnake(this.ctx, this.snake.location);
+    service.drawFood(this.ctx, this.food);
   }
 
-  resetGame(){
-    const self = this;
-    self.snake = new Snake();
+  resetGame() {
+    this.snake = new Snake();
     scoreElem.innerText = 0;
     // food need create after snake initialized, for not conflict purpose
-    self.food = service.createNewFood(self.snake.location);
-    self.gameOver = false;
+    this.food = service.createNewFood(this.snake.location);
+    this.gameOver = false;
   }
 }
 

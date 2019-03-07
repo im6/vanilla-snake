@@ -1,17 +1,17 @@
+/* eslint no-underscore-dangle: "off" */
 import {
   INIT_DIRECTION,
   SNAKE_INIT_LENGTH,
-} from '../constant.js';
+} from '../constant';
 
 class Snake {
   constructor() {
-    const self = this;
-    self.direction = INIT_DIRECTION;
-    self.previousDirection = null;
-    self._score = SNAKE_INIT_LENGTH;
-    self.location = [];
-    for(let i = SNAKE_INIT_LENGTH; i > 0; i--){
-      self.location.push({
+    this.direction = INIT_DIRECTION;
+    this.previousDirection = null;
+    this._score = SNAKE_INIT_LENGTH;
+    this.location = [];
+    for (let i = SNAKE_INIT_LENGTH; i > 0; i -= 1) {
+      this.location.push({
         x: 0,
         y: i,
       });
@@ -19,42 +19,36 @@ class Snake {
   }
 
   get nextHead() {
-    const self = this;
-    const head = self.location[0];
+    const head = this.location[0];
     return {
-      x: head.x + self.direction.x,
-      y: head.y + self.direction.y,
-    }
+      x: head.x + this.direction.x,
+      y: head.y + this.direction.y,
+    };
   }
 
-  get score(){
+  get score() {
     return this._score - SNAKE_INIT_LENGTH;
   }
 
-  changeDirection(newDir){
-    const self = this;
-    if(self.previousDirection.x === newDir.x * -1 ||
-      self.previousDirection.y === newDir.y * -1
+  changeDirection(newDir) {
+    if (this.previousDirection.x === newDir.x * -1 || this.previousDirection.y === newDir.y * -1
     ) {
       return;
     }
-
-    self.direction = newDir;
+    this.direction = newDir;
   }
-  
+
   move() {
-    const self = this;
-    if (self._score === self.location.length) {
-      self.location.pop();
+    if (this._score === this.location.length) {
+      this.location.pop();
     }
 
-    self.previousDirection = self.direction;
-    self.location.unshift(self.nextHead);
+    this.previousDirection = this.direction;
+    this.location.unshift(this.nextHead);
   }
 
-  eat(){
-    const self = this;
-    self._score += 1;
+  eat() {
+    this._score += 1;
   }
 }
 

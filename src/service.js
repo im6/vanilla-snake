@@ -5,7 +5,7 @@ import {
   SNAKE_HEAD_COLOR,
   SNAKE_BODY_COLOR,
   FOOD_COLOR,
-} from './constant.js'
+} from './constant';
 
 // =============== private scope function ================
 
@@ -14,19 +14,15 @@ const drawBox = (ctx, point, color) => {
   ctx.fillRect(point.x * BOX_SIZE, point.y * BOX_SIZE, BOX_SIZE, BOX_SIZE);
 };
 
-const getSnakeBoxColor = idx => {
-  return idx === 0 ? SNAKE_HEAD_COLOR : SNAKE_BODY_COLOR;
-};
+const getSnakeBoxColor = idx => (idx === 0 ? SNAKE_HEAD_COLOR : SNAKE_BODY_COLOR);
 
-const getRandomNumber = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 // =============== export function below ==================
 
 const drawSnake = (ctx, snake) => {
   snake.forEach((v, k) => {
-    drawBox(ctx, v, getSnakeBoxColor(k))
+    drawBox(ctx, v, getSnakeBoxColor(k));
   });
 };
 
@@ -34,21 +30,14 @@ const drawFood = (ctx, food) => {
   drawBox(ctx, food, FOOD_COLOR);
 };
 
-const detectCollision = (n1, n2) => {
-  return n1.x === n2.x && n1.y === n2.y;
-};
+const detectCollision = (n1, n2) => n1.x === n2.x && n1.y === n2.y;
 
-const isEmptyCell = (point, snake) => {
-  return !snake.some(v => detectCollision(v, point));
-};
+const isEmptyCell = (point, snake) => !snake.some(v => detectCollision(v, point));
 
-const checkHitWall = (point) => {
-  const isHit = point.x >= CANVAS_WIDTH ||
-      point.x < 0 ||
-      point.y >= CANVAS_HEIGHT ||
-      point.y < 0;
-  return isHit;
-};
+const checkHitWall = point => (point.x >= CANVAS_WIDTH
+  || point.x < 0
+  || point.y >= CANVAS_HEIGHT
+  || point.y < 0);
 
 const createNewFood = (snake) => {
   const position = {
@@ -60,8 +49,8 @@ const createNewFood = (snake) => {
 
 const checkHeadHitBody = (head, body) => {
   let willHit = false;
-  for(let i = 3; i < body.length; i ++) {  // head cannot hit index in [0,1,2]
-    if(detectCollision(head, body[i])){
+  for (let i = 3; i < body.length; i += 1) { // head cannot hit index in [0,1,2]
+    if (detectCollision(head, body[i])) {
       willHit = true;
     }
   }
@@ -76,4 +65,4 @@ export default {
   checkHitWall,
   createNewFood,
   checkHeadHitBody,
-}
+};
