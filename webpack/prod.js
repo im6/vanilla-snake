@@ -1,19 +1,22 @@
-"use strict";
+/* eslint strict: "off", import/no-extraneous-dependencies: "off" */
+
+'use strict';
+
 const webpack = require('webpack');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  //devtool: 'cheap-module-source-map',
+  // devtool: 'cheap-module-source-map',
   mode: 'production',
-  entry: `./src/main.js`,
+  entry: './src/main.js',
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, `../public`),
+    path: path.join(__dirname, '../public'),
     publicPath: '/build',
   },
-  module:{
+  module: {
     rules: [
       {
         test: /\.scss$/,
@@ -22,9 +25,9 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          { loader: "css-loader", },
-          { loader: "sass-loader", }
-        ]
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ],
       },
       {
         test: /\.jsx?$/,
@@ -32,19 +35,19 @@ module.exports = {
         use: [{
           loader: 'babel-loader',
           options: {
-            "presets": ['@babel/preset-env']
-          }
-        }]
+            presets: ['@babel/preset-env'],
+          },
+        }],
       },
     ],
   },
   plugins: [
     new UglifyJsPlugin(),
     new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
   ],
 };
