@@ -1,5 +1,12 @@
 import Snake from './Snake';
-import service from '../service';
+import {
+  checkHitWall,
+  checkHeadHitBody,
+  createNewFood,
+  detectCollision,
+  drawSnake,
+  drawFood,
+} from '../service';
 import {
   BOX_SIZE,
   CANVAS_HEIGHT,
@@ -56,13 +63,13 @@ class SnakeApp {
 
   detectNext() {
     let res = null;
-    if (service.detectCollision(this.snake.nextHead, this.food)) {
+    if (detectCollision(this.snake.nextHead, this.food)) {
       this.snake.eat();
-      this.food = service.createNewFood(this.snake.location);
+      this.food = createNewFood(this.snake.location);
       scoreElem.innerText = this.snake.score;
-    } else if (service.checkHitWall(this.snake.nextHead)) {
+    } else if (checkHitWall(this.snake.nextHead)) {
       res = 'wall';
-    } else if (service.checkHeadHitBody(this.snake.nextHead, this.snake.location)) {
+    } else if (checkHeadHitBody(this.snake.nextHead, this.snake.location)) {
       res = 'body';
     }
     return res;
@@ -82,15 +89,15 @@ class SnakeApp {
 
     this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     this.snake.move();
-    service.drawSnake(this.ctx, this.snake.location);
-    service.drawFood(this.ctx, this.food);
+    drawSnake(this.ctx, this.snake.location);
+    drawFood(this.ctx, this.food);
   }
 
   resetGame() {
     this.snake = new Snake();
     scoreElem.innerText = 0;
     // food need create after snake initialized, for not conflict purpose
-    this.food = service.createNewFood(this.snake.location);
+    this.food = createNewFood(this.snake.location);
     this.gameOver = false;
   }
 }

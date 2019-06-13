@@ -2,13 +2,10 @@
 
 'use strict';
 
-const webpack = require('webpack');
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  // devtool: 'cheap-module-source-map',
   mode: 'production',
   entry: './src/main.js',
   output: {
@@ -42,12 +39,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new UglifyJsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
     new MiniCssExtractPlugin(),
   ],
 };

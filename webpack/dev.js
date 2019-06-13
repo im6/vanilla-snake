@@ -6,6 +6,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const port = 3000;
+
 module.exports = {
   watch: true,
   mode: 'development',
@@ -13,7 +15,7 @@ module.exports = {
   entry: [
     './src/main.js',
     'webpack/hot/only-dev-server',
-    'webpack-dev-server/client?http://localhost:3000',
+    `webpack-dev-server/client?http://localhost:${port}`,
   ],
   module: {
     rules: [
@@ -46,18 +48,13 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-      },
-    }),
   ],
   devServer: {
     contentBase: './public', // set 'public' path, relative to root
     noInfo: true,
     hot: true,
     inline: true,
-    port: '3000',
+    port,
     host: 'localhost',
     open: 'Google Chrome',
   },
