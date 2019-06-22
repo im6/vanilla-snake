@@ -21,18 +21,29 @@ const canvasHeight = CANVAS_HEIGHT * BOX_SIZE;
 const startBtnElem = document.getElementById('gameStartBtn');
 const scoreElem = document.getElementById('scoreText');
 
+const appKey = Symbol('singleton');
+const singleton = {};
+
 class SnakeApp {
   constructor() {
+    if (appKey in singleton) {
+      return singleton[appKey];
+    }
+
     this.initCanvas();
     this.addAppListener();
 
     this.snake = null;
     this.food = null;
     this.gameOver = true;
+    singleton[appKey] = this;
   }
 
   initCanvas() {
     const canvasElem = document.getElementById(CANVAS_DOM_ID);
+    if (!canvasElem) {
+      return;
+    }
     canvasElem.width = canvasWidth;
     canvasElem.height = canvasHeight;
 
@@ -48,10 +59,11 @@ class SnakeApp {
         this.snake.changeDirection(DIRECTIONS[keyCode]);
       }
     });
-
-    startBtnElem.addEventListener('click', () => {
-      this.resetGame();
-    });
+    if (startBtnElem) {
+      startBtnElem.addEventListener('click', () => {
+        this.resetGame();
+      });
+    }
   }
 
   showGameOver(reason) {
