@@ -2,7 +2,7 @@
 import {
   INIT_DIRECTION,
   SNAKE_INIT_LENGTH,
-} from '../constant';
+} from '../../constant';
 
 class Snake {
   constructor() {

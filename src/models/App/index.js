@@ -1,4 +1,4 @@
-import Snake from './Snake';
+import Snake from '../Snake';
 import {
   checkHitWall,
   checkHeadHitBody,
@@ -6,7 +6,7 @@ import {
   detectCollision,
   drawSnake,
   drawFood,
-} from '../service';
+} from '../../service';
 import {
   BOX_SIZE,
   CANVAS_HEIGHT,
@@ -14,7 +14,7 @@ import {
   CANVAS_DOM_ID,
   SNAKE_HEAD_COLOR,
   DIRECTIONS,
-} from '../constant';
+} from '../../constant';
 
 const canvasWidth = CANVAS_WIDTH * BOX_SIZE;
 const canvasHeight = CANVAS_HEIGHT * BOX_SIZE;

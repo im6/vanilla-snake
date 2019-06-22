@@ -1,5 +1,5 @@
 import './style.scss';
-import SnakeApp from './models/SnakeApp';
+import SnakeApp from './models/App';
 import { GAME_INTERVAL } from './constant';
 
 const app = new SnakeApp();
