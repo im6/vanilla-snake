@@ -12,7 +12,7 @@ const drawBox = (ctx, point, color) => {
   ctx.fillRect(point.x * BOX_SIZE, point.y * BOX_SIZE, BOX_SIZE, BOX_SIZE);
 };
 
-const getSnakeBoxColor = idx => (idx === 0 ? SNAKE_HEAD_COLOR : SNAKE_BODY_COLOR);
+const getSnakeBoxColor = (idx) => (idx === 0 ? SNAKE_HEAD_COLOR : SNAKE_BODY_COLOR);
 
 const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -28,9 +28,9 @@ export const drawFood = (ctx, food) => {
 
 export const detectCollision = (n1, n2) => n1.x === n2.x && n1.y === n2.y;
 
-export const isEmptyCell = (point, snake) => !snake.some(v => detectCollision(v, point));
+export const isEmptyCell = (point, snake) => !snake.some((v) => detectCollision(v, point));
 
-export const checkHitWall = point => (point.x >= CANVAS_WIDTH
+export const checkHitWall = (point) => (point.x >= CANVAS_WIDTH
   || point.x < 0
   || point.y >= CANVAS_HEIGHT
   || point.y < 0);
