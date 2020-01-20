@@ -11,26 +11,26 @@ import {
   BOX_SIZE,
   CANVAS_HEIGHT,
   CANVAS_WIDTH,
-  CANVAS_DOM_ID,
   SNAKE_HEAD_COLOR,
   DIRECTIONS,
 } from '../../constant';
 
 const canvasWidth = CANVAS_WIDTH * BOX_SIZE;
 const canvasHeight = CANVAS_HEIGHT * BOX_SIZE;
-const startBtnElem = document.getElementById('gameStartBtn');
-const scoreElem = document.getElementById('scoreText');
 
 const appKey = Symbol('singleton');
 const singleton = {};
 
 class SnakeApp {
-  constructor() {
+  constructor({ startBtnElem, scoreElem, canvasElem }) {
     if (appKey in singleton) {
       return singleton[appKey];
     }
 
-    this.initCanvas();
+    this.startBtnElem = startBtnElem;
+    this.scoreElem = scoreElem;
+
+    this.initCanvas(canvasElem);
     this.addAppListener();
 
     this.snake = null;
@@ -39,12 +39,10 @@ class SnakeApp {
     singleton[appKey] = this;
   }
 
-  initCanvas() {
-    const canvasElem = document.getElementById(CANVAS_DOM_ID);
-    if (!canvasElem) {
-      return;
-    }
+  initCanvas(canvasElem) {
+    // eslint-disable-next-line no-param-reassign
     canvasElem.width = canvasWidth;
+    // eslint-disable-next-line no-param-reassign
     canvasElem.height = canvasHeight;
 
     this.ctx = canvasElem.getContext('2d');
@@ -53,14 +51,14 @@ class SnakeApp {
   }
 
   addAppListener() {
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       const { keyCode } = e;
       if (keyCode in DIRECTIONS && !this.gameOver) {
         this.snake.changeDirection(DIRECTIONS[keyCode]);
       }
     });
-    if (startBtnElem) {
-      startBtnElem.addEventListener('click', () => {
+    if (this.startBtnElem) {
+      this.startBtnElem.addEventListener('click', () => {
         this.resetGame();
       });
     }
@@ -78,7 +76,7 @@ class SnakeApp {
     if (detectCollision(this.snake.nextHead, this.food)) {
       this.snake.eat();
       this.food = createNewFood(this.snake.location);
-      scoreElem.innerText = this.snake.score;
+      this.scoreElem.innerText = this.snake.score;
     } else if (checkHitWall(this.snake.nextHead)) {
       res = 'wall';
     } else if (checkHeadHitBody(this.snake.nextHead, this.snake.location)) {
@@ -107,7 +105,7 @@ class SnakeApp {
 
   resetGame() {
     this.snake = new Snake();
-    scoreElem.innerText = 0;
+    this.scoreElem.innerText = 0;
     // food need create after snake initialized, for not conflict purpose
     this.food = createNewFood(this.snake.location);
     this.gameOver = false;
