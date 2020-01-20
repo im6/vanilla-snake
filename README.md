@@ -18,4 +18,4 @@ it should automatically open page on default browser with localhost:3000
 npm start
 ```
 
-### [DEMO](http://www.javascript.fun/demo/snake-vanilla/)
+### [DEMO](http://www.javascript.fun/vanilla-snake/)
