@@ -3,6 +3,7 @@
 'use strict';
 
 const webpack = require('webpack');
+const path = require('path');
 
 const port = 3000;
 
@@ -10,11 +11,11 @@ module.exports = {
   watch: true,
   mode: 'development',
   devtool: 'source-map',
-  entry: [
-    './src/main.js',
-    'webpack/hot/only-dev-server',
-    `webpack-dev-server/client?http://localhost:${port}`,
-  ],
+  entry: './src/main.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, '../docs'),
+  },
   module: {
     rules: [
       {
@@ -29,14 +30,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env'],
-            },
-          },
-        ],
+        use: ['babel-loader'],
       },
     ],
   },
@@ -48,7 +42,6 @@ module.exports = {
     contentBase: './docs', // set 'public' path, relative to root
     noInfo: true,
     hot: true,
-    inline: true,
     port,
     host: 'localhost',
     open: 'Google Chrome',
