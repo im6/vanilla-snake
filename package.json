@@ -4,7 +4,7 @@
   "description": "A snake game with vanilla javascript",
   "main": "/src/main.js",
   "scripts": {
-    "start": "webpack-dev-server --color --config webpack/dev.js",
+    "dev": "webpack-dev-server --color --config webpack/dev.js",
     "build": "webpack --config webpack/prod.js",
     "lint": "eslint src/ webpack/",
     "test": "jest ./src --coverage"
