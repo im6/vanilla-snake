@@ -2,6 +2,8 @@
 
 A snake game, build by vanilla javascript.
 
+## [DEMO](http://www.javascript.fun/vanilla-snake/)
+
 ## cli instructions
 
 1. Install all dependency for development
@@ -17,5 +19,3 @@ it should automatically open page on default browser with localhost:3000
 ```sh
 npm start
 ```
-
-### [DEMO](http://www.javascript.fun/vanilla-snake/)

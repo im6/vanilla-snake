@@ -11,7 +11,7 @@ module.exports = {
   watch: true,
   mode: 'development',
   devtool: 'source-map',
-  entry: './src/main.js',
+  entry: './src',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, '../docs'),
@@ -21,11 +21,7 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'sass-loader' },
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.jsx?$/,
