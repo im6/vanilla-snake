@@ -40,6 +40,6 @@ module.exports = {
     hot: true,
     port,
     host: 'localhost',
-    open: 'Google Chrome',
+    // open: 'Google Chrome',
   },
 };
