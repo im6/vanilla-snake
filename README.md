@@ -1,8 +1,8 @@
-# Snake Game ![](https://github.com/im6/vanilla-snake/workflows/build/badge.svg)
+# Snake Game ![ci/cd](https://github.com/im6/vanilla-snake/workflows/build/badge.svg)
 
 A snake game, build by vanilla javascript.
 
-## [DEMO](http://www.javascript.fun/vanilla-snake/)
+## [DEMO](https://www.javascript.fun/vanilla-snake/)
 
 ## cli instructions
 

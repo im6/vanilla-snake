@@ -8,7 +8,6 @@ const path = require('path');
 const port = 3000;
 
 module.exports = {
-  watch: true,
   mode: 'development',
   devtool: 'source-map',
   entry: './src',
